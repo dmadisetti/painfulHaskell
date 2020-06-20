@@ -15,10 +15,10 @@ Problem 35
    Answer: b53b3a3d6ab90ce0268229151c9bde11
 -}
 
-import Data.Monoid
-import Data.Char
-import GHC.Float
-import Helpers (primes, is_prime)
+import           Data.Char
+import           Data.Monoid
+import           GHC.Float
+import           Helpers     (is_prime, primes)
 
 log10 :: Int -> Int
 log10 = float2Int . logBase 10 . int2Float

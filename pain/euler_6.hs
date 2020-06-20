@@ -21,7 +21,7 @@ Problem 6
    Answer: 867380888952c39a131fe1d832246ecc
 -}
 
-import Helpers (triangle)
+import           Helpers (triangle)
 
 square_triangles a = sum [x ^ 2 | x <- [1..a]]
 

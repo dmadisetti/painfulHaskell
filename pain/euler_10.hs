@@ -11,7 +11,7 @@ Problem 10
    Answer: d915b2a9ac8749a6b837404815f1ae25
 -}
 
-import Helpers (primes)
+import           Helpers (primes)
 
 main :: IO ()
 main = print $ sum $ takeWhile (<2000000) primes

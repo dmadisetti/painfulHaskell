@@ -18,7 +18,7 @@ Problem 21
    Answer: 51e04cd4e55e7e415bf24de9e1b0f3ff
 -}
 
-import Helpers (factorize)
+import           Helpers (factorize)
 
 check :: [Int]
 check = [x | x <- [2..10000], let f = factorize x, let y = sum f, x/=y, let q = (sum $ factorize $ y), x == q]

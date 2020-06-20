@@ -17,9 +17,9 @@ Problem 37
    Answer: cace46c61b00de1b60874936a093981d
 -}
 
-import Data.Char
-import Data.Set (intersection, fromList)
-import Helpers (is_prime, primes)
+import           Data.Char
+import           Data.Set  (fromList, intersection)
+import           Helpers   (is_prime, primes)
 
 
 growable = "123579"

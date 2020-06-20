@@ -20,11 +20,11 @@ Problem 22
    Answer: f2c9c91cb025746f781fa4db8be3983f
 -}
 
-import System.IO
-import Data.Monoid
-import Data.Maybe
-import Data.Char (ord)
-import Data.List (sort)
+import           Data.Char   (ord)
+import           Data.List   (sort)
+import           Data.Maybe
+import           Data.Monoid
+import           System.IO
 
 extract_sum :: String -> Int
 extract_sum = sum . zipWith rank [1..] . sort . map numerize . parse

@@ -14,7 +14,7 @@ Problem 15
    Answer: 928f3957168ac592c4215dcd04e0b678
 -}
 
-import Helpers (factorial)
+import           Helpers (factorial)
 
 permute :: Integer -> Integer -> Integer
 permute n 0 = 1

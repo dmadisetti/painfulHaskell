@@ -13,7 +13,7 @@ Problem 5
    Answer: bc0d0a22a7a46212135ed0ba77d22f3a
 -}
 
-import Helpers (prime_factorize, count)
+import           Helpers (count, prime_factorize)
 
 range = [1..20]
 

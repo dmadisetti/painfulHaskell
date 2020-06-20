@@ -21,8 +21,9 @@ Problem 30
    Answer: 27a1779a8a8c323a307ac8a70bc4489d
 -}
 
-import Data.HashMap (Map, empty, singleton, insertWith, mapWithKey, elems)
-import Data.Char
+import           Data.Char
+import           Data.HashMap (Map, elems, empty, insertWith, mapWithKey,
+                               singleton)
 
 limit = (+) 1 $ length $ show $ 9^5
 

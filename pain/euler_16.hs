@@ -11,7 +11,7 @@ Problem 16
    Answer: 6a5889bb0190d0211a991f47bb19a777
 -}
 
-import Data.Char
+import           Data.Char
 
 main :: IO ()
 main = print $ sum $ map digitToInt (show $ 2 ^ 1000)

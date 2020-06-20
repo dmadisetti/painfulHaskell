@@ -11,7 +11,7 @@ Problem 3
    Answer: 94c4dd41f9dddce696557d3717d98d82
 -}
 
-import Helpers (prime_factorize)
+import           Helpers (prime_factorize)
 
 main :: IO ()
 main = print $ maximum (prime_factorize 600851475143)

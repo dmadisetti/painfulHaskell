@@ -23,9 +23,9 @@ Problem 38
    Answer: f2a29ede8dc9fae7926dc7a4357ac25e
 -}
 
-import Data.Char (ord, digitToInt)
-import Data.List (nub)
-import Data.Maybe
+import           Data.Char  (digitToInt, ord)
+import           Data.List  (nub)
+import           Data.Maybe
 
 viable :: [Int]
 viable = capture [1..9] 0

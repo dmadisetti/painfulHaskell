@@ -110,7 +110,7 @@ Problem 13
    Answer: 361113f19fd302adc31268f8283a4f2d
 -}
 
-import Text.Printf (printf)
+import           Text.Printf (printf)
 
 main :: IO ()
 main = printf "%s" $ take 10 $ show $ sum [

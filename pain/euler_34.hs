@@ -14,9 +14,10 @@ Problem 34
    Answer: 60803ea798a0c0dfb7f36397d8d4d772
 -}
 
-import Data.HashMap (Map, empty, singleton, insertWith, mapWithKey, elems)
-import Data.Char
-import Helpers (factorial)
+import           Data.Char
+import           Data.HashMap (Map, elems, empty, insertWith, mapWithKey,
+                               singleton)
+import           Helpers      (factorial)
 
 limit = toInteger $ (+) 1 $ length $ show $ factorial 9
 

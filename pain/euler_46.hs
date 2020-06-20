@@ -22,7 +22,7 @@ Problem 46
    Answer: 89abe98de6071178edb1b28901a8f459
 -}
 
-import Helpers (primes, is_divisible)
+import           Helpers (is_divisible, primes)
 
 merge :: [Int] -> [Int] -> [Int] -> Int
 merge sq@(s:ss) pm@(p:ps) od@(o:os)

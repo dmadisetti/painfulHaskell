@@ -21,7 +21,7 @@ Problem 33
    Answer: f899139df5e1059396431415e770c6dd
 -}
 
-import Data.Ratio
+import           Data.Ratio
 
 extract :: Int -> [Ratio Int]
 extract x = [ra | a <- [1..x-1], b <- [a..x],

@@ -26,8 +26,8 @@ Problem 23
    Answer: 2c8258c0604152962f7787571511cf28
 -}
 
-import Helpers (factorize, triangle)
-import Data.Set (fromList)
+import           Data.Set (fromList)
+import           Helpers  (factorize, triangle)
 
 abundants :: [Int]
 abundants = [x | x <- [2..28123], let f = factorize x, let y = sum f, y > x]

@@ -14,8 +14,8 @@ Problem 39
    Answer: fa83a11a198d5a7f0bf77a1987bcd006
 -}
 
-import Data.HashMap (Map, foldWithKey, insertWith, empty)
-import Helpers (triplets)
+import           Data.HashMap (Map, empty, foldWithKey, insertWith)
+import           Helpers      (triplets)
 
 accumulate :: Map Int Int -> Int -> Map Int Int
 accumulate = inner 0

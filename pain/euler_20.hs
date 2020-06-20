@@ -15,8 +15,8 @@ Problem 20
    Answer: 443cb001c138b2561a0d90720d6ce111
 -}
 
-import Data.Char
-import Helpers (factorial)
+import           Data.Char
+import           Helpers   (factorial)
 
 main :: IO ()
 main = print $ sum $ map digitToInt (show $ factorial 100)

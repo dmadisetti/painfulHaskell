@@ -13,7 +13,7 @@ Problem 41
    Answer: d0a1bd6ab4229b2d0754be8923431404
 -}
 
-import Helpers (is_prime)
+import           Helpers (is_prime)
 
 viable :: [Int]
 viable = capture (reverse [1..9]) 0 0

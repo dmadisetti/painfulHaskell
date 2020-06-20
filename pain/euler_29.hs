@@ -22,7 +22,7 @@ Problem 29
    Answer: 6f0ca67289d79eb35d19decbc0a08453
 -}
 
-import Data.Set (fromList)
+import           Data.Set (fromList)
 
 main :: IO ()
 main = print $ length $ fromList [a^b | a <- range, b <- range]

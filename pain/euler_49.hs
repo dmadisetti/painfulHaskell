@@ -19,11 +19,11 @@ Problem 49
    Answer: 0b99933d3e2a9addccbb663d46cbb592
 -}
 
-import Helpers (primes, is_prime)
-import Data.Maybe (mapMaybe)
-import Data.Monoid
-import Data.HashMap (Map, isSubmapOf, empty, insertWith, elems)
-import Text.Printf (printf)
+import           Data.HashMap (Map, elems, empty, insertWith, isSubmapOf)
+import           Data.Maybe   (mapMaybe)
+import           Data.Monoid
+import           Helpers      (is_prime, primes)
+import           Text.Printf  (printf)
 
 comp h@(a:as) (b:bs)
   | x > 10000     = comp h []

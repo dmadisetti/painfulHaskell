@@ -22,8 +22,8 @@ Problem 47
    Answer: 748f517ecdc29106e2738f88aa7530f4
 -}
 
-import Data.HashMap
-import Helpers (prime_factorize)
+import           Data.HashMap
+import           Helpers      (prime_factorize)
 
 enumerate :: Int -> Map Int Int
 enumerate x = base $ prime_factorize x

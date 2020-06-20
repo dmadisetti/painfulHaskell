@@ -11,8 +11,8 @@ Problem 48
    Answer: 0829124724747ae1c65da8cae5263346
 -}
 
-import Data.HashMap
-import Helpers (prime_factorize)
+import           Data.HashMap
+import           Helpers      (prime_factorize)
 
 m :: Integer
 m = 10000000000

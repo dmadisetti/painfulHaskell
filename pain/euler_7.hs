@@ -12,7 +12,7 @@ Problem 7
    Answer: 8c32ab09ec0210af60d392e9b2009560
 -}
 
-import Helpers (primes)
+import           Helpers (primes)
 
 main :: IO ()
 main = print $ primes !! 10000

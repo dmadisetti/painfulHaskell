@@ -16,7 +16,7 @@ Problem 36
    Answer: 0e175dc2f28833885f62e7345addff03
 -}
 
-import Helpers (is_palindrome_base, is_int_palindrome)
+import           Helpers (is_int_palindrome, is_palindrome_base)
 
 limit = 1000000
 growable = [0..9]

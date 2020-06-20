@@ -20,8 +20,8 @@ Problem 50
    Answer: 73229bab6c5dc1c7cf7a4fa123caf6bc
 -}
 
-import Helpers (primes, is_prime)
-import Data.HashMap (Map, isSubmapOf, empty, insertWith, elems)
+import           Data.HashMap (Map, elems, empty, insertWith, isSubmapOf)
+import           Helpers      (is_prime, primes)
 
 t = 1000000
 

@@ -29,9 +29,9 @@ Problem 12
    Answer: 8091de7d285989bbfa9a2f9f3bdcc7c0
 -}
 
-import Helpers (prime_factorize)
-import Data.HashMap
-import Data.List
+import           Data.HashMap
+import           Data.List
+import           Helpers      (prime_factorize)
 
 
 combinations 0 lst = [[]]
