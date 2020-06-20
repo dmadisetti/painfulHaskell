@@ -1,6 +1,10 @@
-module Helpers (prime_factorize, is_prime, count, is_palindrome, is_int_palindrome, alt_gcd, triangle, primes, factorial, factorize) where
+module Helpers (prime_factorize, is_prime, count, is_palindrome,
+is_int_palindrome, alt_gcd, triangle, primes, factorial, factorize,
+is_divisible, is_palindrome_base, composites, triplets) where
 
 import Data.List
+import Numeric (showIntAtBase)
+import Data.Char (intToDigit)
 
 type Whole = Int
 
@@ -18,7 +22,6 @@ prime_factorize i
     f _ _ 29 = [29]
     f _ _ 31 = [31]
     f _ _ 71 = [71]
-    f _ _ 97 = [97]
     f _ _ 149899 = [149899]
     f _ _ 3667387 = [3667387]
     f xs n a
@@ -55,15 +58,19 @@ alt_gcd a b
 
 is_palindrome :: Eq a => [a] -> Bool
 is_palindrome a
-  | l <= 1                          = True
-  | head a /= (a !! (l - 1))        = False
-  | otherwise                       = is_palindrome $ tail $ take (l - 1) a
+  | l <= 1                  = True
+  | head a /= last a        = False
+  | otherwise               = is_palindrome $ tail $ take (l - 1) a
   where
     l = length a
 
 
+is_palindrome_base :: Int -> Int -> Bool
+is_palindrome_base 10 = is_palindrome . show
+is_palindrome_base base = is_palindrome . flip (showIntAtBase base intToDigit) ""
+
 is_int_palindrome :: Int -> Bool
-is_int_palindrome x = is_palindrome $ show x
+is_int_palindrome =  is_palindrome_base 10
 
 
 triangle :: Whole -> Whole
@@ -71,12 +78,31 @@ triangle n = fromIntegral $ quot (x ^ 2 + x) 2
   where x = toInteger n
 
 
+triplets :: [(Int, Int, Int)]
+triplets = root:recurse [root]
+  where
+    root = (3, 4, 5)
+    m (x, y, z) = (x + 2 * (y + z),  y + 2 * (x + z), 3 * z + 2 * (x + y))
+    a (x, y, z) = m (x, -y, z)
+    b (x, y, z) = m (x, y, z)
+    c (x, y, z) = m (-x, y, z)
+    recurse (x:q) = next ++ (recurse $ q ++ next)
+      where
+        next = map ($ x) [a, b, c]
+
 primes :: [Whole]
 primes = 2: next 3
   where
     next n
       | is_divisible n = next (n + 2)
       | otherwise = n:next (n + 2)
+
+composites :: [Whole]
+composites = 4:6:next 8
+  where
+    next n
+      | is_prime n = (n + 1):next (n + 2)
+      | otherwise = n:next (n + 1)
 
 is_divisible n = head (prime_factorize n) /= n
 is_prime = not . is_divisible

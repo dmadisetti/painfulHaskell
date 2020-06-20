@@ -305,3 +305,196 @@ euler_test(
     problem = 25,
     solution = ":euler_bin25",
 )
+
+haskell_binary(
+    name = "euler_bin23",
+    srcs = ["euler_23.hs"],
+    deps = ["//:base", ":helpers", "@stackage//:containers"],
+)
+
+euler_test(
+    name = "euler_23_test",
+    problem = 23,
+    solution = ":euler_bin23",
+)
+
+haskell_binary(
+    name = "euler_bin37",
+    srcs = ["euler_37.hs"],
+    deps = ["//:base", ":helpers", "@stackage//:containers"],
+)
+
+euler_test(
+    name = "euler_37_test",
+    problem = 37,
+    solution = ":euler_bin37",
+)
+
+haskell_binary(
+    name = "euler_bin38",
+    srcs = ["euler_38.hs"],
+    deps = ["//:base"],
+)
+
+euler_test(
+    name = "euler_38_test",
+    problem = 38,
+    solution = ":euler_bin38",
+)
+
+haskell_binary(
+    name = "euler_bin48",
+    srcs = ["euler_48.hs"],
+    deps = ["@stackage//:hashmap", "//:base", ":helpers"],
+)
+
+euler_test(
+    name = "euler_48_test",
+    problem = 48,
+    solution = ":euler_bin48",
+)
+
+haskell_binary(
+    name = "euler_bin41",
+    srcs = ["euler_41.hs"],
+    deps = ["//:base", ":helpers"],
+)
+
+euler_test(
+    name = "euler_41_test",
+    problem = 41,
+    solution = ":euler_bin41",
+)
+
+haskell_binary(
+    name = "euler_bin46",
+    srcs = ["euler_46.hs"],
+    deps = ["//:base", ":helpers"],
+)
+
+euler_test(
+    name = "euler_46_test",
+    problem = 46,
+    solution = ":euler_bin46",
+)
+
+haskell_binary(
+    name = "euler_bin49",
+    srcs = ["euler_49.hs"],
+    deps = ["@stackage//:hashmap", "//:base", "helpers"],
+)
+
+euler_test(
+    name = "euler_49_test",
+    problem = 49,
+    solution = ":euler_bin49",
+)
+
+haskell_binary(
+    name = "euler_bin50",
+    srcs = ["euler_50.hs"],
+    deps = ["@stackage//:hashmap", "//:base", "helpers"],
+)
+
+euler_test(
+    name = "euler_50_test",
+    problem = 50,
+    solution = ":euler_bin50",
+)
+
+haskell_binary(
+    name = "euler_bin29",
+    srcs = ["euler_29.hs"],
+    deps = ["//:base", "@stackage//:containers"],
+)
+
+euler_test(
+    name = "euler_29_test",
+    problem = 29,
+    solution = ":euler_bin29",
+)
+
+haskell_binary(
+    name = "euler_bin30",
+    srcs = ["euler_30.hs"],
+    deps = ["@stackage//:hashmap", "//:base"],
+)
+
+euler_test(
+    name = "euler_30_test",
+    problem = 30,
+    solution = ":euler_bin30",
+)
+
+haskell_binary(
+    name = "euler_bin22",
+    srcs = ["euler_22.hs"],
+    deps = ["//:base"],
+    data = ["@euler//:external_euler"],
+)
+
+euler_test(
+    name = "euler_22_test",
+    problem = 22,
+    solution = ":euler_bin22",
+)
+
+haskell_binary(
+    name = "euler_bin34",
+    srcs = ["euler_34.hs"],
+    deps = ["@stackage//:hashmap", "//:base", "helpers"],
+)
+
+euler_test(
+    name = "euler_34_test",
+    problem = 34,
+    solution = ":euler_bin34",
+)
+
+haskell_binary(
+    name = "euler_bin36",
+    srcs = ["euler_36.hs"],
+    deps = ["//:base", "helpers"],
+)
+
+euler_test(
+    name = "euler_36_test",
+    problem = 36,
+    solution = ":euler_bin36",
+)
+
+haskell_binary(
+    name = "euler_bin47",
+    srcs = ["euler_47.hs"],
+    deps = ["@stackage//:hashmap", "//:base", "helpers"],
+)
+
+euler_test(
+    name = "euler_47_test",
+    problem = 47,
+    solution = ":euler_bin47",
+)
+
+haskell_binary(
+    name = "euler_bin44",
+    srcs = ["euler_44.hs"],
+    deps = ["//:base"],
+)
+
+euler_test(
+    name = "euler_44_test",
+    problem = 44,
+    solution = ":euler_bin44",
+)
+
+haskell_binary(
+    name = "euler_bin39",
+    srcs = ["euler_39.hs"],
+    deps = ["@stackage//:hashmap", "//:base", "helpers"],
+)
+
+euler_test(
+    name = "euler_39_test",
+    problem = 39,
+    solution = ":euler_bin39",
+)
