@@ -26,12 +26,12 @@ Problem 14
    Answer: 5052c3765262bb2c6be537abd60b305e
 -}
 
-collatz :: Int -> [Int]
-collatz 1 = [1]
+collatz :: Int -> Int
+collatz 1 = 1
 collatz n
-  | even n      = n:collatz (quot n 2)
-  | otherwise   = n:collatz (3*n + 1)
+  | even n      = 1 + collatz (quot n 2)
+  | otherwise   = 1 + collatz (3*n + 1)
 
 
 main :: IO ()
-main = print $ snd $ maximum [(length $ collatz n, n) | n <- [1..1000000]]
+main = print $ snd $ maximum [(collatz n, n) | n <- [1..1000000]]

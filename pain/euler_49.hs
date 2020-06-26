@@ -40,12 +40,8 @@ perm ps
   | otherwise   = Nothing
   where
     is_perm = getAll $ mconcat $ map (All . (==) r) reduced
-    (r:reduced) = map (foldl aggregate init) ps
-    update old new = old + new
-    aggregate :: Map Char Int -> Char -> Map Char Int
-    aggregate m el = insertWith update el 1 m
-    init :: Map Char Int
-    init = empty
+    (r:reduced) = map (foldl aggregate empty) ps
+    aggregate m el = insertWith (+) el 1 m
 
 main :: IO ()
 main = printf "%s" $ last $ mapMaybe perm $ comp h ps

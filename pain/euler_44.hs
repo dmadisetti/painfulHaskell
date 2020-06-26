@@ -19,6 +19,35 @@ Problem 44
    Answer: 2c2556cb85621309ca647465ffa62370
 -}
 
+import           Control.Monad
+import           Data.Maybe
+
+maybeSquare x
+  | root^2 == x    = Just root
+  | otherwise      = Nothing
+  where
+    root = floor $ sqrt $ fromIntegral x
+
+maybeDiv x y
+  | y == 0              = Nothing
+  | 0 == (mod x y)      = Just (quot x y)
+  | otherwise           = Nothing
+
+process :: Integer -> Integer -> Maybe Integer
+process i d = do
+  let pi = (pentagonal i)
+  j <- maybeDiv ((-) pi (pentagonal d)) (3 * d)
+  let pl = j * (j * 3 - 1) + pi
+  x0 <- maybeSquare (1 + 24*pl)
+  let l = (maybeDiv (1 + x0) 6)
+  case l of
+    Just l'  -> Just pi
+    Nothing -> Nothing
+
+pentagonal :: Integer -> Integer
+pentagonal n = quot (n * (3 * n -1)) 2
+
+attempt i d = msum [process i d' | d' <- [d, d+3..i-3]]
 
 main :: IO ()
-main = undefined
+main = print $ fromJust $ msum [attempt i (mod i 3) | i <- [8..]]

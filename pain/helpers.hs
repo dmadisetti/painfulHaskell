@@ -2,9 +2,9 @@ module Helpers (prime_factorize, is_prime, count, is_palindrome,
 is_int_palindrome, alt_gcd, triangle, primes, factorial, factorize,
 is_divisible, is_palindrome_base, composites, triplets) where
 
-import Data.List
-import Numeric (showIntAtBase)
-import Data.Char (intToDigit)
+import           Data.Char (intToDigit)
+import           Data.List
+import           Numeric   (showIntAtBase)
 
 type Whole = Int
 
@@ -25,9 +25,9 @@ prime_factorize i
     f _ _ 149899 = [149899]
     f _ _ 3667387 = [3667387]
     f xs n a
-        | mod a n == 0                   = xs ++ prime_factorize n ++ prime_factorize (a `div` n)
-        | n > (a `div` n)                = a:xs
-        | otherwise                      = f xs (n + 2) a
+        | mod a n == 0       = xs ++ prime_factorize n ++ prime_factorize (a `div` n)
+        | n > (a `div` n)    = a:xs
+        | otherwise          = f xs (n + 2) a
 
 
 factorize :: Int -> [Int]
@@ -104,5 +104,6 @@ composites = 4:6:next 8
       | is_prime n = (n + 1):next (n + 2)
       | otherwise = n:next (n + 1)
 
+is_divisible 1 = True
 is_divisible n = head (prime_factorize n) /= n
 is_prime = not . is_divisible
