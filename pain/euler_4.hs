@@ -12,12 +12,12 @@ Problem 4
    Answer: d4cfc27d16ea72a96b83d9bdef6ce2ec
 -}
 
-import           Helpers (is_int_palindrome)
+import           Helpers (isIntPalindrome)
 
 main :: IO ()
 main = print $ maximum [ans |
     x <- [100..999],
     y <- [100..999],
     let ans = x * y,
-    is_int_palindrome ans]
+    isIntPalindrome ans]
 

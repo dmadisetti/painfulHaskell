@@ -18,29 +18,29 @@ Problem 35
 import           Data.Char
 import           Data.Monoid
 import           GHC.Float
-import           Helpers     (is_prime, primes)
+import           Helpers     (isPrime, primes)
 
 log10 :: Int -> Int
 log10 = float2Int . logBase 10 . int2Float
 
-is_circular_prime :: Int -> Bool
-is_circular_prime n = length (take (l + 1) (n:circ n)) == (l + 1)
+isCircularPrime :: Int -> Bool
+isCircularPrime n = length (take (l + 1) (n:circ n)) == (l + 1)
   where
     l = log10 n
     circ x
       | x < 10      = x:circ x
-      | is_prime x' = x':circ x'
+      | isPrime x' = x':circ x'
       | otherwise   = []
       where
-        x' = quot x 10 + (10 ^ l) * (mod x 10)
+        x' = quot x 10 + (10 ^ l) * mod x 10
 
 evenContaining :: Int -> Bool
 evenContaining = getAny .
                     mconcat .
-                        map (Any . not . easily_divisible) .
-                            (map digitToInt) . show
+                        map ((Any . not . easily_divisible) .
+                            digitToInt) . show
                   where
                     easily_divisible n = even n || n == 5
 
 main :: IO ()
-main = print $ (+) 2 $ length $ filter is_circular_prime $ filter evenContaining (takeWhile (<1000000) primes)
+main = print $ (+) 2 $ length $ filter isCircularPrime $ filter evenContaining (takeWhile (<1000000) primes)

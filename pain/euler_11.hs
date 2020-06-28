@@ -69,7 +69,7 @@ horiz = map investigate
 diag hay = vert shifted
   where
     shifted = [shift bale i | (i, bale) <- zip [0..length hay - 1] hay]
-    shift xs amt = (drop amt xs) ++ take amt xs
+    shift xs amt = drop amt xs ++ take amt xs
 
 
 diag1 hay = diag (map reverse hay)
@@ -78,8 +78,8 @@ diag1 hay = diag (map reverse hay)
 vert hay = horiz (transpose hay)
 
 
-find_needle :: [[Int]] -> Int
-find_needle hay = maximum $ map (\f -> maximum $ f hay) [vert, diag, diag1]
+findNeedle :: [[Int]] -> Int
+findNeedle hay = maximum $ map (\f -> maximum $ f hay) [vert, diag, diag1]
 
 main :: IO ()
-main = print  $ find_needle haystack
+main = print  $ findNeedle haystack

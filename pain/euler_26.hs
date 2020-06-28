@@ -31,19 +31,19 @@ import           Data.List (sort)
 import           Data.Maybe
 
 pow = (+) 1 . floor . logBase 10 . fromIntegral
-remm l x = mod (10^((pow x) + l)) x
+remm l x = mod (10^(pow x + l)) x
 check :: Integer -> Maybe Integer
 check x = check' (singleton (remm 0 x) 0) 1
   where
     check' :: Map Integer Integer -> Integer -> Maybe Integer
     check' m l
       | member 0 m   = Nothing
-      | member y m   = (-) (l) <$> Data.HashMap.lookup y m
+      | member y m   = (-) l <$> Data.HashMap.lookup y m
       | otherwise    = check' (insert y l m) (l + 1)
       where
         y = remm l x
 
 main :: IO ()
-main = print $ snd $ last $ sort $ zip (map check range) range
+main = print $ snd $ maximum $ zip (map check range) range
   where
     range = [1..1000]

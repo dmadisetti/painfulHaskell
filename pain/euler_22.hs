@@ -26,8 +26,8 @@ import           Data.Maybe
 import           Data.Monoid
 import           System.IO
 
-extract_sum :: String -> Int
-extract_sum = sum . zipWith rank [1..] . sort . map numerize . parse
+extractSum :: String -> Int
+extractSum = sum . zipWith rank [1..] . sort . map numerize . parse
   where
    rank i = (*) i . sum
    numerize = map ((+) (-64) . ord)
@@ -44,5 +44,5 @@ main :: IO ()
 main = do
   handle <- openFile "external/euler/files/names.txt" ReadMode
   contents <- hGetContents handle
-  print $ extract_sum contents
+  print $ extractSum contents
   hClose handle

@@ -35,22 +35,22 @@ viable = toList $ fromList $ capture [0..9] 0
   where
     capture ks n
       | n > 100   = [n]
-      | otherwise  = [n] ++ (mconcat $ map gen ks)
+      | otherwise  = n:mconcat (map gen ks)
       where
         next k = n * 10 + k
         gen k = capture (filter (/=k) ks) (next k)
 
 
-type Trie = Map Char (Map Char [Char])
+type Trie = Map Char (Map Char String)
 
-toTrie :: Trie -> [Char] -> Trie
+toTrie :: Trie -> String -> Trie
 toTrie t [c, b, a] = insertWith f a (singleton b c') t
   where
     c' = [c]
-    f _ old = insertWith (union) b c' old
+    f _ old = insertWith union b c' old
 
-divisor :: Int -> [[Char]]
-divisor n = filter ensure $ map augment $ map show $ filter check viable
+divisor :: Int -> [String]
+divisor n = filter ensure $ map (augment . show) $ filter check viable
   where
     ensure [a, b, c] = not $ a == b || b == c || c == a
     augment n
@@ -61,21 +61,21 @@ divisor n = filter ensure $ map augment $ map show $ filter check viable
 divisortrie :: Int -> Trie
 divisortrie = foldl toTrie empty . divisor
 
-explore :: [Trie] -> [Char] -> Int
+explore :: [Trie] -> String -> Int
 explore [] s = read $ x:s
   where
    [x] = "0123456789" \\ s
 explore (t:ts) s@(k':k:_) = sum $ map (explore ts) continuations
   where
     continuations = catMaybes $ process $ Data.HashMap.lookup k t
-    process :: Maybe (Map Char [Char]) -> [Maybe [Char]]
+    process :: Maybe (Map Char String) -> [Maybe String]
     process Nothing   = [Nothing]
     process (Just t') = process' $ Data.HashMap.lookup k' t'
-    process' :: Maybe [Char] -> [Maybe [Char]]
+    process' :: Maybe String -> [Maybe String]
     process' Nothing   = [Nothing]
     process' (Just s') = map f s'
     f x
-      | elem x s   = Nothing
+      | x `elem` s   = Nothing
       | otherwise  = Just (x:s)
 
 

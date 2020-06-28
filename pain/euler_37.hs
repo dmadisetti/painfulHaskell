@@ -19,35 +19,35 @@ Problem 37
 
 import           Data.Char
 import           Data.Set  (fromList, intersection)
-import           Helpers   (is_prime, primes)
+import           Helpers   (isPrime, primes)
 
 
 growable = "123579"
 
-grow :: (Int -> Char -> Int) -> [Char] -> Int -> [Int]
+grow :: (Int -> Char -> Int) -> String -> Int -> [Int]
 grow expand (k:ks) n
-  | is_prime n'     = n': grow expand growable n' ++ (grow expand ks n)
+  | isPrime n'     = n': grow expand growable n' ++ grow expand ks n
   | otherwise       = grow expand ks n
   where
     n' = expand n k
 
 grow _ [] n = []
 
-toInt :: [Char] -> Int
+toInt :: String -> Int
 toInt n = sum $ zipWith numerize (reverse n) [0..l]
   where
-    l = (length n) - 1
-    numerize c p = (digitToInt c) * 10 ^ p
+    l = length n - 1
+    numerize c p = digitToInt c * 10 ^ p
 
-expand_left n k =  toInt $ k:(show n)
-expand_right n k = toInt $ (show n) ++ [k]
+expandLeft n k =  toInt $ k:show n
+expandRight n k = toInt $ show n ++ [k]
 
 process f = fromList $
                 mconcat $
                     map (grow f growable) (takeWhile (<10) primes)
 
-left = process expand_left
-right = process expand_right
+left = process expandLeft
+right = process expandRight
 
 main :: IO ()
 main = print $ sum $ intersection left right

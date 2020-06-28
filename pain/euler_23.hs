@@ -36,7 +36,7 @@ comp h@(a:as) (b:bs)
   | x > 28123     = comp h bs
   | otherwise     = x: comp h bs
   where
-    x = (a + b)
+    x = a + b
 comp (a:as) [] = comp as as
 comp [] [] = []
 
@@ -44,4 +44,4 @@ pcomp = fromList (comp x x)
   where x = abundants
 
 main :: IO ()
-main = print $ (triangle 28123) - (sum $ pcomp)
+main = print $ triangle 28123 - sum pcomp

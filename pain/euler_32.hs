@@ -33,7 +33,7 @@ viable = capture (reverse [1..9]) []
         result = toNum [f,g,h,i]
         valid  = check [a,b,z] [d,e]
         valid' = check [a,b,z,d] [e]
-        check x y = (toNum x) * (toNum y) == result
+        check x y = toNum x * toNum y == result
         toNum = sum . zipWith (*) (map (10^) [0..]) . reverse
     capture ks n = mconcat $ map gen ks
       where

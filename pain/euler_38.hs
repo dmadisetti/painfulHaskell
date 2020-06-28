@@ -32,17 +32,17 @@ viable = capture [1..9] 0
   where
     capture ks n
       | n > 1000   = [n]
-      | otherwise  = [n] ++ (mconcat $ map gen ks)
+      | otherwise  = n:mconcat (map gen ks)
       where
         next k = n * 10 + k
         gen k = capture (filter (/=k) ks) (next k)
 
 
-toInt :: [Char] -> Int
+toInt :: String -> Int
 toInt n = sum $ zipWith numerize (reverse n) [0..l]
   where
-    l = (length n) - 1
-    numerize c p = (digitToInt c) * 10 ^ p
+    l = length n - 1
+    numerize c p = digitToInt c * 10 ^ p
 
 
 pandigit :: Int -> Maybe Int
@@ -59,8 +59,8 @@ pandigit n = expand "" 1
       k' = k + 1
   invalid s = sized || zeroed
     where
-      sized = length s /= (length $ nub $ s)
-      zeroed = elem 48 (map ord s)
+      sized = length s /= length (nub s)
+      zeroed = 48 `elem` map ord s
 
 
 main :: IO ()

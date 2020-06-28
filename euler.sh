@@ -14,7 +14,10 @@ NAME=${NAMING_SCHEME}_${PROBLEM}
 
 pushd ~/misc/haskell/pain/pain
 
-if [ $FLAG == "--edit" ]; then
+if [ $FLAG == "--examine" ]; then
+  bazel run --experimental_ui_limit_console_output=1 @euler//examine $PROBLEM
+  status=$?
+elif [ $FLAG == "--edit" ]; then
   if [ ! -f $NAME.hs ]; then
     bazel run --experimental_ui_limit_console_output=1 @euler//stub -- b ${NAMING_SCHEME} --haskell $PROBLEM >> BUILD || exit 1
     bazel run --experimental_ui_limit_console_output=1 @euler//stub -- --haskell $PROBLEM > ${NAME}.hs || exit 1

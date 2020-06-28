@@ -37,7 +37,7 @@ compute previous row = zipWith (+) row best
     best = zipWith max (0:previous) (previous ++ [0])
 
 parse :: String -> [[Int]]
-parse = map (map read) . map words . lines
+parse = map (map read . words) . lines
 
 main :: IO ()
 main = do

@@ -21,13 +21,13 @@ Problem 50
 -}
 
 import           Data.Maybe (mapMaybe)
-import           Helpers    (is_prime, primes)
+import           Helpers    (isPrime, primes)
 
 l = 1000000
 
 f sigma l' delta (i, s)
   | i + delta >= l' ||  ans > l  = Nothing
-  | is_prime $ ans = Just ans
+  | isPrime ans = Just ans
   | otherwise  = Nothing
   where
     ans = (sigma !! (i+delta)) - s
@@ -36,7 +36,7 @@ main :: IO ()
 main = print $ head $ mapMaybe check processes
   where
     check p
-      | r == []  = Nothing
+      | null r  = Nothing
       | otherwise = Just (head r)
       where
         r = mapMaybe p zipped

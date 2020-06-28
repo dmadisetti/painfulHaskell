@@ -49,7 +49,7 @@ cosmic ns = sum $ map cosmetize ns
 main :: IO ()
 main = print $
         100 * cosmic ones +
-        (cosmetize 100) * 900 +
+        cosmetize 100 * 900 +
         9 * 99 * and +
         10 * perHundred + thousand
   where
@@ -61,6 +61,6 @@ main = print $
     teen = length "teen"
     thousand = length "onethousand"
     perHundred = cosmic (ones ++ weird) +
-          cosmic teens + teen * (length teens) +
+          cosmic teens + teen * length teens +
           10 * cosmic tens +
-          (length tens) * cosmic ones
+          length tens * cosmic ones

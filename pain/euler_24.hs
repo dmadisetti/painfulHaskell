@@ -25,7 +25,7 @@ perm xs = [y:zs | (y,ys) <- select xs, zs <- perm ys]
         select (x:xs) = (x,xs) : [ (y,x:ys) | (y,ys) <- select xs ]
 
 main :: IO ()
-main = print $ result
+main = print result
   where
     result :: Int
     result = read $ perm "0123456789" !! (1000000 - 1)

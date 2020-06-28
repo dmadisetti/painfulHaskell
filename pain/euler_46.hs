@@ -22,7 +22,7 @@ Problem 46
    Answer: 89abe98de6071178edb1b28901a8f459
 -}
 
-import           Helpers (is_divisible, primes)
+import           Helpers (isDivisible, primes)
 
 merge :: [Int] -> [Int] -> [Int] -> Int
 merge sq@(s:ss) pm@(p:ps) od@(o:os)
@@ -39,7 +39,7 @@ squares = 1:sq 2
     sq n = n*n:sq (n + 1)
 
 odds :: [Int]
-odds = filter is_divisible [3,5..]
+odds = filter isDivisible [3,5..]
 
 main :: IO ()
 main = print $ merge squares primes odds

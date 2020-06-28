@@ -13,20 +13,20 @@ Problem 41
    Answer: d0a1bd6ab4229b2d0754be8923431404
 -}
 
-import           Helpers (is_prime)
+import           Helpers (isPrime)
 
 viable :: [Int]
 viable = capture (reverse [1..9]) 0 0
   where
     capture [] n i = []
     capture ks n i
-      | ((last ks) - 1) == i      = search ++ [n]
+      | (last ks - 1) == i      = search ++ [n]
       | otherwise                 = search
       where
-        search = (mconcat $ map gen ks)
+        search = mconcat $ map gen ks
         next k = n * 10 + k
         gen k = capture (filter (/=k) ks) (next k) (max i k)
 
 
 main :: IO ()
-main = print $ head $ filter is_prime viable
+main = print $ head $ filter isPrime viable

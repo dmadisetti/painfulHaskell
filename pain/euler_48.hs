@@ -12,7 +12,7 @@ Problem 48
 -}
 
 import           Data.HashMap
-import           Helpers      (prime_factorize)
+import           Helpers      (primeFactorize)
 
 m :: Integer
 m = 10000000000
@@ -36,11 +36,12 @@ modulo :: Integer -> Int -> Integer -> Integer
 modulo b e m = last $ take e (em b 1 m)
 
 moduloMap :: Int -> Int -> Integer -> Integer
-moduloMap key val prev = mod (prev * (modulo (toInteger key) val m)) m
+moduloMap key val prev = mod (prev * modulo (toInteger key) val m) m
 
 -- What's the point if this is faster
 -- main = print $ flip mod m $ (+) 1 $ sum $ zipWith (^) range range
 main :: IO ()
-main = print $ flip mod m $ (+) 1 $ sum $ Prelude.map (foldWithKey moduloMap 1) $ zipWith enumerate range (Prelude.map (prime_factorize) range)
+main = print $ flip mod m $ (+) 1 $ sum $ Prelude.map (foldWithKey moduloMap 1)
+             $ zipWith enumerate range (Prelude.map primeFactorize range)
   where
     range = [2..1000]

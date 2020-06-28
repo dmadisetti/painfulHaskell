@@ -30,16 +30,16 @@ maybeSquare x
 
 maybeDiv x y
   | y == 0              = Nothing
-  | 0 == (mod x y)      = Just (quot x y)
+  | 0 == mod x y        = Just (quot x y)
   | otherwise           = Nothing
 
 process :: Integer -> Integer -> Maybe Integer
 process i d = do
-  let pi = (pentagonal i)
+  let pi = pentagonal i
   j <- maybeDiv ((-) pi (pentagonal d)) (3 * d)
   let pl = j * (j * 3 - 1) + pi
-  x0 <- maybeSquare (1 + 24*pl)
-  let l = (maybeDiv (1 + x0) 6)
+  x0 <- maybeSquare $ 1 + 24*pl
+  let l = maybeDiv (1 + x0) 6
   case l of
     Just l'  -> Just pi
     Nothing -> Nothing

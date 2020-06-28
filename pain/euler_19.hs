@@ -42,6 +42,6 @@ sundays (d, s) y
           where next'  = mod (d + b) 7
 
 main :: IO ()
-main = print $ snd $ foldl (sundays) (2, 0) range
+main = print $ snd $ foldl sundays (2, 0) range
   where
     range = [1901..2000]

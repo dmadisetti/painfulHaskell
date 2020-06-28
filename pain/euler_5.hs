@@ -13,7 +13,7 @@ Problem 5
    Answer: bc0d0a22a7a46212135ed0ba77d22f3a
 -}
 
-import           Helpers (count, prime_factorize)
+import           Helpers (count, primeFactorize)
 
 range = [1..20]
 
@@ -23,9 +23,9 @@ aggregate lookup fs = [max (count x fs) (lookup !! (x - 1)) | x <- range]
 run :: Int
 run = result
   where
-    result = foldl (*) 1 expanded
-    expanded = [x ^ p | x <- range, let p = primes !! (x - 1), p > 0]
-    primes = (foldl aggregate lookup (map prime_factorize range))
+    result = product expanded
+    expanded = [x ^ p | (p, x) <- zip primes range, p > 0]
+    primes = foldl aggregate lookup (map primeFactorize range)
     lookup = [0 | _ <- range]
 
 

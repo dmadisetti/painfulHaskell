@@ -33,12 +33,12 @@ reorder nums el = insertWith (+) el 1 nums
 
 isTriangular' n = k*(k+1) == n'
   where
-    n' = (2 * n)
+    n' = 2 * n
     k = floor $ sqrt $ fromIntegral n'
 isTriangular _ = isTriangular'
 
-extract_sum :: String -> Int
-extract_sum =  sum . elems . filterWithKey (flip isTriangular) . foldl reorder empty . map sum . map numerize . parse
+extractSum :: String -> Int
+extractSum =  sum . elems . filterWithKey (flip isTriangular) . foldl reorder empty . map (sum . numerize) . parse
   where
    numerize = map ((+) (-64) . ord)
    parse = words . mapMaybe replace
@@ -54,5 +54,5 @@ main :: IO ()
 main = do
   handle <- openFile "external/euler/files/words.txt" ReadMode
   contents <- hGetContents handle
-  print $ extract_sum contents
+  print $ extractSum contents
   hClose handle

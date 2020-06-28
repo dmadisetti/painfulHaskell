@@ -22,19 +22,19 @@ Problem 49
 import           Data.HashMap (Map, elems, empty, insertWith, isSubmapOf)
 import           Data.Maybe   (mapMaybe)
 import           Data.Monoid
-import           Helpers      (is_prime, primes)
+import           Helpers      (isPrime, primes)
 import           Text.Printf  (printf)
 
 comp h@(a:as) (b:bs)
   | x > 10000     = comp h []
-  | is_prime x    = (map show [a, b, x]):comp h bs
+  | isPrime x    = map show [a, b, x]:comp h bs
   | otherwise     = comp h bs
   where
     x = b * 2 - a
 comp (_:a:as) [] = comp (a:as) as
 comp _ _ = []
 
-perm :: [[Char]] -> Maybe [Char]
+perm :: [String] -> Maybe String
 perm ps
   | is_perm     = Just (mconcat ps)
   | otherwise   = Nothing

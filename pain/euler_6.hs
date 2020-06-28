@@ -23,8 +23,8 @@ Problem 6
 
 import           Helpers (triangle)
 
-square_triangles a = sum [x ^ 2 | x <- [1..a]]
+squareTriangles a = sum [x ^ 2 | x <- [1..a]]
 
 
 main :: IO ()
-main = print $ (triangle 100) ^ 2 - (square_triangles 100)
+main = print $ triangle 100 ^ 2 - squareTriangles 100

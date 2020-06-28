@@ -58,11 +58,11 @@ haystack = unlines ["73167176531330624919225119674426574742355349194934",
                     "71636269561882670428252483600823257530420752963450"]
 
 
-find_needle :: [Int] -> Int
-find_needle hay = maximum $ take (length hay - 13) (search hay)
+findNeedle :: [Int] -> Int
+findNeedle hay = maximum $ take (length hay - 13) (search hay)
   where
-    search pile = (foldl (*) 1 (take 13 pile)): search (drop 1 pile)
+    search pile = product (take 13 pile): search (drop 1 pile)
 
 
 main :: IO ()
-main = print  $ find_needle $ map digitToInt (filter isDigit haystack)
+main = print  $ findNeedle $ map digitToInt (filter isDigit haystack)

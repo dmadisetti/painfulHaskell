@@ -16,7 +16,7 @@ Problem 36
    Answer: 0e175dc2f28833885f62e7345addff03
 -}
 
-import           Helpers (is_int_palindrome, is_palindrome_base)
+import           Helpers (isIntPalindrome, isPalindromeBase)
 
 limit = 1000000
 growable = [0..9]
@@ -29,7 +29,7 @@ grow d k n
   | palindromic        = n:explosion
   | otherwise          = explosion
   where
-    palindromic = (is_palindrome_base 2 n)
+    palindromic = isPalindromeBase 2 n
     explosion = mconcat $ map check growable
     check k = grow (d + 1) k (expand d n k)
 
@@ -38,7 +38,7 @@ expand :: Int -> Int -> Int -> Int
 expand d n k = read $ k':n' ++ [k']
   where
     n'
-      | n == 0    = take d (repeat '0')
+      | n == 0    = replicate d '0'
       | otherwise = extra ++ n''
       where
         extra = takeWhile (== '0') (reverse n'')

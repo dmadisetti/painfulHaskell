@@ -27,10 +27,10 @@ dive x' = recurse 0 0
     x = x' - 1
     recurse index power
       | (index' - x) < 0   = recurse index' (power + 1)
-      | otherwise          = digitToInt $ (show $ (+) (10^power) $ quot (x - index) (power + 1)) !! (mod (x - index) (power + 1))
+      | otherwise          = digitToInt $ show ((+) (10^power) $ quot (x - index) (power + 1)) !! mod (x - index) (power + 1)
       where
         index' = index + (power + 1) * 9 * 10^power
 
 
 main :: IO ()
-main = print $ product $ map dive (map (10^) [0..6])
+main = print $ product $ map (dive . (10^)) [0..6]

@@ -23,10 +23,10 @@ Problem 47
 -}
 
 import           Data.HashMap
-import           Helpers      (prime_factorize)
+import           Helpers      (primeFactorize)
 
 enumerate :: Int -> Map Int Int
-enumerate x = base $ prime_factorize x
+enumerate x = base $ primeFactorize x
   where
     base = foldl aggregate empty
     aggregate m el = insertWith (+) el 1 m

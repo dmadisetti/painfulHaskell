@@ -31,10 +31,10 @@ Problem 27
    Answer: 69d9e3218fd7abb6ff453ea96505183d
 -}
 
-import           Helpers (is_prime, primes)
+import           Helpers (isPrime, primes)
 
 viableTill :: Int -> Int -> Int
-viableTill a b = length $ takeWhile (is_prime . f) [1..]
+viableTill a b = length $ takeWhile (isPrime . f) [1..]
   where
     f x = x^2 + a * x + b
 

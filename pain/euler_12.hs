@@ -31,7 +31,7 @@ Problem 12
 
 import           Data.HashMap
 import           Data.List
-import           Helpers      (prime_factorize)
+import           Helpers      (primeFactorize, triangles)
 
 
 combinations 0 lst = [[]]
@@ -42,7 +42,7 @@ combinations n lst = do
 
 
 total :: [Int] -> Int
-total xs = sum [sum [product j | j <- (combinations i xs)] | i <- [1..l]]
+total xs = sum [sum [product j | j <- combinations i xs] | i <- [1..l]]
   where
     l = length xs
 
@@ -56,17 +56,8 @@ enumerate xs = elems $ foldl aggregate init xs
     init :: Map Int Int
     init = empty
 
-triangles :: [Int]
-triangles = 1: next triangles 1 1
-    where
-      next _  1 1 = 3: next triangles 3 2
-      next xs prev n = nth: next xs nth (n + 1)
-        where
-          nth = prev + n + 1
-
-
 factorCount :: [Int]
-factorCount = [t | t <- triangles, let count = total $ enumerate $ prime_factorize t, count > 500]
+factorCount = [t | t <- triangles, let count = total $ enumerate $ primeFactorize t, count > 500]
 
 main :: IO ()
 main = print $ head factorCount

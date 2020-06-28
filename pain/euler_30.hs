@@ -40,12 +40,12 @@ strMap = foldl reorder empty . map digitToInt
 
 grow :: Int -> Map Int Int -> [Int]
 grow k nums
-  | (sum $ elems nums) > limit   = []
+  | sum (elems nums) > limit   = []
   | strMap n' == nums     = n:explosion
   | otherwise             = explosion
   where
     n = toNum nums
-    n' = show $ n
+    n' = show n
     explosion = mconcat $ map check (filter (>=k) [0..9])
     check k = grow k $ reorder nums k
 

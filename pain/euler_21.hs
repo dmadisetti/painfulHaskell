@@ -21,7 +21,13 @@ Problem 21
 import           Helpers (factorize)
 
 check :: [Int]
-check = [x | x <- [2..10000], let f = factorize x, let y = sum f, x/=y, let q = (sum $ factorize $ y), x == q]
+check = [x |
+           x <- [2..10000],
+           let f = factorize x,
+           let y = sum f,
+           x /= y,
+           let q = sum $ factorize y,
+           x == q]
 
 main :: IO ()
 main = print $ sum check

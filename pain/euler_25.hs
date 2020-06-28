@@ -36,7 +36,7 @@ Problem 25
 
 fib :: Integer -> Integer -> Integer -> Integer
 fib a b n
-  | (length $ show b) >= 1000    = n
+  | length (show b) >= 1000    = n
   | otherwise                    = fib b (a + b) (n + 1)
 
 main :: IO ()
