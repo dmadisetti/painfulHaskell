@@ -50,9 +50,8 @@ total xs = sum [sum [product j | j <- combinations i xs] | i <- [1..l]]
 enumerate :: [Int] -> [Int]
 enumerate xs = elems $ foldl aggregate init xs
   where
-    update old new = old + new
     aggregate :: Map Int Int -> Int -> Map Int Int
-    aggregate m el = insertWith update el 1 m
+    aggregate m el = insertWith (+) el 1 m
     init :: Map Int Int
     init = empty
 

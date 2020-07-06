@@ -633,3 +633,27 @@ euler_test(
     problem = 27,
     solution = ":euler_bin27",
 )
+
+haskell_binary(
+    name = "euler_bin51",
+    srcs = ["euler_51.hs"],
+    deps = ["@stackage//:hashable", "@stackage//:hashmap", "//:base", "helpers"],
+)
+
+euler_test(
+    name = "euler_51_test",
+    problem = 51,
+    solution = ":euler_bin51",
+)
+
+haskell_binary(
+    name = "euler_bin52",
+    srcs = ["euler_52.hs"],
+    deps = ["@stackage//:hashmap", "//:base"],
+)
+
+euler_test(
+    name = "euler_52_test",
+    problem = 52,
+    solution = ":euler_bin52",
+)
