@@ -86,7 +86,7 @@ import Data.Maybe
 import Data.List
 
 cards = 16
-sides = 4 :: Integer
+sides = 6 :: Integer
 die = 2 :: Integer
 cells = 40 :: Integer
 -- 3x double rolls brings us to jail.
@@ -216,7 +216,7 @@ probs = [sum $ map (probs' !!) d | d <- indices]
       slots = [0..cells' - 1] :: [Int]
       board = [0..dims' - 1]  :: [Int]
       -- Solve the eigen value problem and coeffiecentwise square.
-      probs' = map (square . realPart) eigenvector
+      probs' = map (\v ->realPart $ v / (sum eigenvector)) eigenvector
       eigenvector = (map (toList) (toRows $ tr eigenvectors)) !! idx
       (eigenvalues, eigenvectors) = eig game
       -- This is a bit of a hack, we have to find eigenvectors
