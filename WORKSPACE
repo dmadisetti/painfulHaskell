@@ -1,4 +1,4 @@
-workspace(name = "euler_example")
+workspace(name = "painful_haskell")
 
 # Load the repository rule to download an http archive.
 load(
@@ -35,7 +35,7 @@ load("@rules_haskell//haskell:cabal.bzl", "stack_snapshot")
 
 stack_snapshot(
     name = "stackage",
-    packages = ["hashmap", "hashable", "hlint", "numbers", "containers"],
+    packages = ["hashmap", "hashable", "hlint", "numbers", "containers", "split", "hmatrix"],
     components = {
         "hlint": ["exe"],
         "containers": ["lib"],
@@ -43,9 +43,12 @@ stack_snapshot(
     snapshot = "lts-13.15",
 )
 
-local_repository(
+http_archive(
     name = "euler",
-    path = "../workspace",
+    strip_prefix = "rules_euler-master",
+    urls = ["https://github.com/dmadisetti/rules_euler/archive/master.tar.gz"],
+    patches = ["euler.patch"],
+    sha256 = "40ad73ea6917adfa739f503689cdc3a10be72e9487821a97bd8b7874bbaf42fa"
 )
 
 load("@euler//:euler.bzl", "euler_repositories", "euler_test")

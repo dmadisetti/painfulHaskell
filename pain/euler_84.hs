@@ -86,7 +86,7 @@ import Data.Maybe
 import Data.List
 
 cards = 16
-sides = 6 :: Integer
+sides = 4 :: Integer
 die = 2 :: Integer
 cells = 40 :: Integer
 -- 3x double rolls brings us to jail.

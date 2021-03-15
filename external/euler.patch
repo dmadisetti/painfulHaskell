@@ -1,0 +1,27 @@
+--- stub/stub.sh
++++ stub/stub.sh
+@@ -11,9 +11,9 @@ fi
+
+ tmp_test () {
+   echo "euler_test(
+-    name = \"${NAME}_test\",
++    name = \"${NAME}_${PROBLEM}_test\",
+     problem = $PROBLEM,
+-    solution = \":$NAME\",
++    solution = \":${NAME}_bin${PROBLEM}\",
+ )"
+ }
+
+@@ -57,9 +57,9 @@ main = undefined"
+ tmp_build_hs () {
+   echo "
+ haskell_binary(
+-    name = \"$NAME\",
+-    srcs = [\"$NAME.hs\"],
+-    deps = [\":base\"],
++    name = \"${NAME}_bin${PROBLEM}\",
++    srcs = [\"${NAME}_${PROBLEM}.hs\"],
++    deps = [\"//:base\"],
+ )
+
+ $(tmp_test)"

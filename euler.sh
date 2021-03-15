@@ -9,10 +9,14 @@ if [ $# -gt 1 ]; then
 fi
 
 PROBLEM=$1; shift || (echo "Provide problem" && exit 1)
+# Sanitize problem
+PROBLEM=`echo $PROBLEM | grep -oP '\d+|^all$'`
+
 NAMING_SCHEME="euler"
 NAME=${NAMING_SCHEME}_${PROBLEM}
+BASE=`dirname "$0"`
 
-pushd ~/misc/haskell/pain/pain
+pushd $BASE/pain
 
 if [ $FLAG == "--examine" ]; then
   bazel run --experimental_ui_limit_console_output=1 @euler//examine $PROBLEM
@@ -22,14 +26,18 @@ elif [ $FLAG == "--edit" ]; then
     bazel run --experimental_ui_limit_console_output=1 @euler//stub -- b ${NAMING_SCHEME} --haskell $PROBLEM >> BUILD || exit 1
     bazel run --experimental_ui_limit_console_output=1 @euler//stub -- --haskell $PROBLEM > ${NAME}.hs || exit 1
   fi
-  nvim $NAME.hs
+  if [ $CODESPACES ]; then
+    code -r $NAME.hs
+  else
+    nvim $NAME.hs
+  fi
   status=$?
 elif [ $FLAG == "--test" ] && [ $PROBLEM == "all" ]; then
   bazel test :all $@
   status=$?
 else
   if [ ! -f $NAME.hs ]; then
-    echo "Expect file does not exist."
+    echo "Expected file does not exist."
     popd
     exit 1
   fi

@@ -1,0 +1,50 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "single",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "command": "${workspaceFolder}/euler.sh --test ${fileBasenameNoExtension}",
+            "problemMatcher": []
+        },
+        {
+            "label": "all",
+            "group": "build",
+            "type": "shell",
+            "command": "${workspaceFolder}/euler.sh --test all",
+            "problemMatcher": []
+        },
+        {
+            "label": "edit",
+            "type": "shell",
+            "command": "${workspaceFolder}/euler.sh --edit ${input:problem}",
+            "problemMatcher": []
+        },
+        {
+            "label": "examine",
+            "type": "shell",
+            "command": "${workspaceFolder}/euler.sh --examine ${input:problem}",
+            "problemMatcher": []
+        },
+        {
+            "label": "repl",
+            "type": "shell",
+            "command": "${workspaceFolder}/euler.sh --repl ${fileBasenameNoExtension}",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "problem",
+            "description": "The problem number to solve.",
+            "default": "-1",
+            "type": "promptString"
+        },
+    ]
+}
