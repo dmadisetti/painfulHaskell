@@ -48,6 +48,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: python_deps
       run: |
         python3 -m pip install wheel mkdocs mkdocs-material python-markdown-math requests
