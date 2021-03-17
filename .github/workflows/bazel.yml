@@ -45,6 +45,7 @@ jobs:
         USE_BAZEL_VERSION: 2.1.0
 
   document:
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - name: python_deps
