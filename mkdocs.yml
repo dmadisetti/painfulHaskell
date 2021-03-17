@@ -1,0 +1,24 @@
+site_name: Painful Haskell
+site_description: Collection 
+site_author: Dylan Madisetti
+repo_url: https://github.com/dmadisetti/painfulhaskell
+theme:
+  name: material
+  icon:
+    repo: 'fontawesome/brands/github'
+  palette:
+    primary: 'white'
+
+markdown_extensions:
+  - mdx_math:
+      enable_dollar_delimiter: True
+  - codehilite:
+      linenums: true
+
+extra_javascript: [
+  'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML',
+  'https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js']
+
+nav:
+  - Home:
+    - index.md
