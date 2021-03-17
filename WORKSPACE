@@ -48,7 +48,8 @@ http_archive(
     strip_prefix = "rules_euler-master",
     urls = ["https://github.com/dmadisetti/rules_euler/archive/master.tar.gz"],
     patches = ["euler.patch"],
-    sha256 = "40ad73ea6917adfa739f503689cdc3a10be72e9487821a97bd8b7874bbaf42fa"
+    sha256 = "40ad73ea6917adfa739f503689cdc3a10be72e9487821a97bd8b7874bbaf42fa",
+    patch_cmds = ["chmod +x stub/stub.sh"]
 )
 
 load("@euler//:euler.bzl", "euler_repositories", "euler_test")
