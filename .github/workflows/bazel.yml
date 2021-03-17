@@ -46,7 +46,6 @@ jobs:
 
   document:
     runs-on: ubuntu-latest
-    wheel mkdocs mkdocs-material python-markdown-math requests
     steps:
     - name: python_deps
       run: |
