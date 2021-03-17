@@ -23,8 +23,9 @@ jobs:
 
     - name: Install misc
       run: |
-        sudo apt-get update && export DEBIAN_FRONTEND=noninteractive \
-          && apt-get -y install --no-install-recommends \
+        sudo apt-get update
+        export DEBIAN_FRONTEND=noninteractive
+        sudo -E apt-get -y install --no-install-recommends \
           python python3 libgmp-dev npm clang-11 make libncurses5 \
           libblas-dev liblapack-dev
 
