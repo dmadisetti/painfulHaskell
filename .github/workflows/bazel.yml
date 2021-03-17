@@ -41,3 +41,5 @@ jobs:
       run: |
         cd "${GITHUB_WORKSPACE}"
         ~/bin/bazel test -t- pain:all
+      env:
+        USE_BAZEL_VERSION: 2.1.0
