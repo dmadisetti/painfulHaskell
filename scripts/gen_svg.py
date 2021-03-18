@@ -23,15 +23,15 @@ times = list(map(lambda t: 5 - max(1, int(t / slowest)), times))
 
 results = dict(zip(tests, times))
 
-data = {"data": [], "themes": ["#AAA", "#966fd6"]}
+data = {"data": [], "themes": ["#AAA", "#966fd6"], "option":{"height": 400}}
 
 # create 10x10 grids with gap bricks
 for c in range(8):
     ci = (c // 4) * 11
     cj = (c % 4) * 11
-    for i in range(1, 11):
-        for j in range(1, 11):
-            index = c * 100 + i * 10 + j
+    for i in range(0, 10):
+        for j in range(0, 10):
+            index = c * 100 + i * 10 + j + 1
             if index in results:
                 data["data"].append([cj + j, ci + i, results[index], 1])
             else:
