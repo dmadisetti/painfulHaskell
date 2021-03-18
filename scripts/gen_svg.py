@@ -23,7 +23,7 @@ times = list(map(lambda t: 5 - max(1, int(t / slowest)), times))
 
 results = dict(zip(tests, times))
 
-data = {"data": [], "themes": ["#AAA", "#966fd6"], "option":{"height": 400}}
+data = {"data": [], "themes": ["#AAA", "#966fd6"], "options":{"height": 400}}
 
 # create 10x10 grids with gap bricks
 for c in range(8):
