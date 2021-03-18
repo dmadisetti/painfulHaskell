@@ -3,7 +3,7 @@
 ### NOTE:
 *Please only use this repository as a reference, once you have solved the problems yourself. No solution problem over problem 100 is provided.*
 
-This project uses the bazel [rules_euler](https://github.com/dmadisetti/rules_euler) to manage it's problems.
+This project uses the bazel [rules_euler](https://github.com/dmadisetti/rules_euler) to manage [its Project Euler problems](http://projecteuler.net/).
 Progress can be seen below, with lighter colored squares taking a long time to solve (on a log scale, and worst case is about 15 seconds)
 
 #### Progress:
