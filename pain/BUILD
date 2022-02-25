@@ -731,3 +731,15 @@ euler_test(
     problem = 56,
     solution = ":euler_bin56",
 )
+
+haskell_binary(
+    name = "euler_bin97",
+    srcs = ["euler_97.hs"],
+    deps = ["//:base"],
+)
+
+euler_test(
+    name = "euler_97_test",
+    problem = 97,
+    solution = ":euler_bin97",
+)
