@@ -85,6 +85,7 @@ jobs:
         ln -s `pwd`/README.md docs/index.md
         ~/bin/bazel test -t- pain:all | grep PASSED | scripts/gen_svg.py | tee docs/progress.svg
         python3 -m mkdocs build
+        curl -L https://projecteuler.net/profile/PainfulHaskell.png -o site/PainfulHaskell.png
       env:
         USE_BAZEL_VERSION: 2.1.0
     - name: deploy
