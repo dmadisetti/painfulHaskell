@@ -743,3 +743,15 @@ euler_test(
     problem = 97,
     solution = ":euler_bin97",
 )
+
+haskell_binary(
+    name = "euler_bin92",
+    srcs = ["euler_92.hs"],
+    deps = ["@stackage//:containers", "//:base", ":helpers"],
+)
+
+euler_test(
+    name = "euler_92_test",
+    problem = 92,
+    solution = ":euler_bin92",
+)

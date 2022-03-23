@@ -40,7 +40,7 @@ stack_snapshot(
         "hlint": ["exe"],
         "containers": ["lib"],
     },
-    snapshot = "lts-13.15",
+    snapshot = "lts-18.26",
 )
 
 http_archive(
