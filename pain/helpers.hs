@@ -98,11 +98,16 @@ triplets = root:recurse [root]
         next = map ($ x) [a, b, c]
 
 primes :: [Whole]
-primes = 2: next 3
+primes = 2: 3 : next 3 0
   where
-    next n
-      | isDivisible n = next (n + 2)
-      | otherwise = n:next (n + 2)
+    next n d
+      | d == 0        = next (n + 2) 1
+      | isDivisible n = next (n + 2) d'
+      | otherwise = n:next (n + 2) d'
+      where
+        d'
+          | d == 1    = 2
+          | otherwise = 0
 
 composites :: [Whole]
 composites = 4:6:next 8

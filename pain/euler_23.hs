@@ -33,7 +33,7 @@ abundants :: [Int]
 abundants = [x | x <- [2..28123], let f = factorize x, let y = sum f, y > x]
 
 comp h@(a:as) (b:bs)
-  | x > 28123     = comp h bs
+  | x > 28123     = comp as as
   | otherwise     = x: comp h bs
   where
     x = a + b

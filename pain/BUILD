@@ -177,7 +177,7 @@ euler_test(
 haskell_binary(
     name = "euler_bin14",
     srcs = ["euler_14.hs"],
-    deps = ["//:base"],
+    deps = ["@stackage//:hashmap", "//:base"],
     compiler_flags = ["-fprof-auto"],
 )
 

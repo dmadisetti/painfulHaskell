@@ -26,12 +26,40 @@ Problem 14
    Answer: 5052c3765262bb2c6be537abd60b305e
 -}
 
+import Data.HashMap (Map, empty, lookup, insert)
+
+
+type Path = Map Int Int
+
 collatz :: Int -> Int
 collatz 1 = 1
 collatz n
-  | even n      = 1 + collatz (quot n 2)
-  | otherwise   = 1 + collatz (3*n + 1)
+  | even n      = quot n 2
+  | otherwise   = 3*n + 1
 
+limit = 1000000
+
+compute cache (v, greedy) head
+   | head >= limit   = v
+   | otherwise       = compute cache' test (head + 1)
+   where
+      (cache', depth)  = look cache head 0
+      test
+        | greedy < depth = (head, depth)
+        | otherwise      = (v, greedy)
+
+look :: Path -> Int -> Int -> (Path, Int)
+look p k d = get $ Data.HashMap.lookup k p
+       where
+          k' = collatz k
+          check
+            | k' == 1        = (p,  1)
+            | k  > 1000000   = (p', l + 1)
+            | otherwise      = (insert k (l + 1) p', l + 1)
+               where
+                  (p', l) = look p k' (d + 1)
+          get (Just l)  = (p, l)
+          get Nothing   = check
 
 main :: IO ()
-main = print $ snd $ maximum [(collatz n, n) | n <- [1..1000000]]
+main = print $ compute empty (1, 1) 1
