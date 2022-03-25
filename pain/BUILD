@@ -755,3 +755,15 @@ euler_test(
     problem = 92,
     solution = ":euler_bin92",
 )
+
+haskell_binary(
+    name = "euler_bin55",
+    srcs = ["euler_55.hs"],
+    deps = ["@stackage//:hashmap", "//:base", ":helpers"],
+)
+
+euler_test(
+    name = "euler_55_test",
+    problem = 55,
+    solution = ":euler_bin55",
+)
