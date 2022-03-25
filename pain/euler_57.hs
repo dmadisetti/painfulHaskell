@@ -33,11 +33,11 @@ progress a b = (2 * b + a, a + b)
 ratio :: [(Integer, Integer)]
 ratio = p (3, 2)
    where
-      p x@(a, b) = x:(p y)
+      p x@(a, b) = x:p y
        where
          y@(a', b') = progress a b
 
 met (a, b) = length (show a) > length (show b)
 
 main :: IO ()
-main = print $ length $ filter met (take 999 ratio)
+main = print $ length $ filter met (take 1000 ratio)
