@@ -48,7 +48,7 @@ limit = 10000
 
 compute cache head
    | head >= limit   = 0
-   | otherwise       = hit + (compute cache' (head + 1))
+   | otherwise       = hit + compute cache' (head + 1)
    where
       (cache', hit)  = look cache head 0
 
@@ -59,13 +59,13 @@ look p k d = get $ Data.HashMap.lookup k p
          k' = read $ reverse (show k)
          s = show t
          check
-            | (isPalindrome s) && k < limit   =  double 1 p
-            | (isPalindrome s)                =  (p, 1)
+            | isPalindrome s && k < limit   =  double 1 p
+            | isPalindrome s                =  (p, 1)
             | d > 50           && k < limit   =  double 0 p
             | d > 50                          =  (p, 0)
             | k < limit                       =  double l p'
             | otherwise                       =  (p', l)
-               where 
+               where
                   (p', l) = look p t (d + 1)
                   double x q = (insert k' x (insert k x q), x)
 
@@ -73,4 +73,4 @@ look p k d = get $ Data.HashMap.lookup k p
          get Nothing   = check
 
 main :: IO ()
-main = print $ 10000 - (compute (empty) 0)
+main = print $ 10000 - compute empty 0

@@ -28,4 +28,4 @@ extract x = [ra | a <- [1..x-1], b <- [a..x],
   let ra = (a * 10 + x) % (x * 10 + b), let rb = a % b, ra == rb]
 
 main :: IO ()
-main = print $ denominator $ product $ mconcat $ [extract x | x <- [1..9]]
+main = print $ denominator $ product $ mconcat [extract x | x <- [1..9]]

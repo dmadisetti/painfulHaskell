@@ -53,16 +53,16 @@ passwords = gen ps ps ps
       (_:ps) = printable
       gen :: [Int] -> [Int] -> [Int] -> [[Int]]
       gen [a] [b] [c] = [[a, b, c]]
-      gen (a:as) [b] [c] = [a, b, c]:(gen as ps ps)
-      gen aa@(a:_) (b:bs) [c] = [a, b, c]:(gen aa bs ps)
-      gen aa@(a:_) bb@(b:_) (c:cs) = [a, b, c]:(gen aa bb cs)
+      gen (a:as) [b] [c] = [a, b, c]:gen as ps ps
+      gen aa@(a:_) (b:bs) [c] = [a, b, c]:gen aa bs ps
+      gen aa@(a:_) bb@(b:_) (c:cs) = [a, b, c]:gen aa bb cs
 
 expected :: Int -> Int
 expected = fromIntegral . round . (*) expect . fromIntegral
    where
-      expect = (sum [letter * freq | (letter, freq) <- zip floaty freqs]) / l
+      expect = sum [letter * freq | (letter, freq) <- zip floaty freqs] / l
       floaty = map fromIntegral printable
-      l =  (fromIntegral $ length printable)
+      l =  fromIntegral $ length printable
 
 computeXOR :: [Int] -> [Int] -> [Int]
 computeXOR cipher pass = [xor letter $ pass !! (i `mod` l) | (i, letter) <- zip [0..] cipher]
@@ -76,7 +76,7 @@ getXOR cipher = bestAttempt attempts maxBound []
       expect = expected $ length cipher
       compute = abs . (-) expect . sum
       attempts_raw = [computeXOR cipher attempt | attempt <- passwords]
-      attempts = filter (not . elem 64) $ filter (not . elem 124) $ map (map (min 124)) attempts_raw
+      attempts = filter (notElem 64) $ filter (notElem 124) $ map (map (min 124)) attempts_raw
       bestAttempt [attempt] best result
          | score < best    = attempt
          | otherwise       = result

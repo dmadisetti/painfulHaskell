@@ -14,4 +14,4 @@ Problem 63
 
 
 main :: IO ()
-main = print $ sum $ [floor $ (log 10)/(log (10 / x)) | x <- [1..9] :: [Double]]
+main = print $ sum [floor $ logBase (10 / x) 10 | x <- [1..9] :: [Double]]

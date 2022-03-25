@@ -34,7 +34,7 @@ sundays (d, s) y
   | otherwise                     = compute months
   where
     compute :: [Int] -> (Int, Int)
-    compute m = foldl next (d, s) m
+    compute = foldl next (d, s)
       where
         next (d, s) b
           | d == 0     = (next', s + 1)

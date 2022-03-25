@@ -28,10 +28,10 @@ trim :: String -> String
 trim = f . f
    where f = reverse . dropWhile isSpace
 
-type Dag   = Map Char [Char]
-type Cache = Map Char [Char]
+type Dag   = Map Char String
+type Cache = Map Char String
 
-search :: Dag -> [Char]
+search :: Dag -> String
 search d = foldl greedy "" paths
    where
       paths = elems $ foldl traverse (empty :: Cache) (toList d)
@@ -44,16 +44,15 @@ search d = foldl greedy "" paths
             new = foldl greedy "" (elems m')
             m' = foldl traverse m (zip v (map byKey v))
       greedy a b
-         | (length a) > (length b) = a
+         | length a > length b = a
          | otherwise               = b
-      byKey = (flip (findWithDefault "") d)
+      byKey = flip (findWithDefault "") d
 
 process :: [String] -> String
 process entries = search dag
    where
       process' :: Dag -> [String] -> Dag
-      process' r (e:es) = process' (chain r e) es
-      process' r [] = r
+      process' = foldl chain
       chain :: Dag -> String -> Dag
       chain r [a, b, c] = r''
          where

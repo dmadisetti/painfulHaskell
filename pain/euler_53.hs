@@ -35,7 +35,7 @@ calc limit needle = calc' 0
          | n <= limit  = calc' result' n' r'
          | otherwise = result
          where
-            result' = (result + (1 + n - 2 * r'))
+            result' = result + (1 + n - 2 * r')
             n' = n + 1
             r' = takeUntil $ r - 1
             takeUntil x
@@ -48,7 +48,7 @@ search limit needle = search'
       search' n
          | choose n r < needle   = search' (n + 1)
          | otherwise             = calc' n r
-         where r = (quot n 2)
+         where r = quot n 2
       calc' = calc limit needle
 
 main :: IO ()

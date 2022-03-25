@@ -80,10 +80,13 @@ Problem 84
 
    Answer: ead3264438ef83a8c2da2e98067b4445
 -}
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use camelCase" #-}
 
 import Numeric.LinearAlgebra
 import Data.Maybe
 import Data.List
+import Data.Ord
 
 cards = 16
 sides = 4 :: Integer
@@ -109,29 +112,29 @@ go = 0 -- GO
 -- standard dice roll barring doubles
 roll :: Integer -> Double
 roll x
-   | x > (die * sides)   = 0.0
+   | x > die * sides   = 0.0
    | x < die             = 0.0
-   | otherwise           = roll'' x - (roll' x)
+   | otherwise           = roll'' x - roll' x
 -- Explicitly doubles
 roll' :: Integer -> Double
 roll' x
    | x < die              = 0.0
    | x > die * sides      = 0.0
    | x `mod` die > 0      = 0.0
-   | otherwise            = 1.0 / (sides' ** die')
+   | otherwise            = 1.0 / sides' ** die'
 -- die roll for 2 die
 roll'' :: Integer -> Double
 roll'' x
    | x < die          = 0.0
    | x > die * sides  = 0.0
-   | otherwise        = ((min x' (2 * sides' + 2 - x')) - 1) / (sides' ** 2)
+   | otherwise        = (min x' (2 * sides' + 2 - x') - 1) / sides' ** 2
    where
       x' = fromInteger x
 
 die_roll :: Integer -> Integer -> Double
 die_roll i j
    | qj > danger                 = 0
-   | qi == danger && j == jail   = (1 / sides') + (ring roll)
+   | qi == danger && j == jail   = 1 / sides' + ring roll
    | qj == 0                     = ring roll
    | qi + 1 == qj                = ring roll'
    | otherwise = 0
@@ -140,12 +143,12 @@ die_roll i j
       ring :: (Integer -> Double) -> Double
       ring d
          | attempt > 0 = attempt
-         | otherwise   = (d (mj + cells - mi))
-         where attempt = (d (mj - mi))
-      mi = (i `mod` cells)
-      mj = (j `mod` cells)
-      qi = (i `quot` cells)
-      qj = (j `quot` cells)
+         | otherwise   = d (mj + cells - mi)
+         where attempt = d (mj - mi)
+      mi = i `mod` cells
+      mj = j `mod` cells
+      qi = i `quot` cells
+      qj = j `quot` cells
 
 construct_system j' i' = sum [
                            edge go2jail maybe_jail,
@@ -161,26 +164,26 @@ construct_system j' i' = sum [
       -- Apply edge cases
       edge edges f = sum $ map (\x -> f x (ring x)) $ in_range edges
       -- Check to see whether i can move to special case.
-      in_range = filter (\e -> (die_roll i e) + (die_roll i $ ring e) > 0)
+      in_range = filter (\e -> die_roll i e + die_roll i (ring e) > 0)
       -- If special space, handle residual for landing on that position,
       -- otherwise it's just a normal roll.
       handle_normal
-         | elem mj go2jail    = 0
-         | elem mj chance     = normal * 6 / cards
-         | elem mj community  = normal * 14 / cards
+         | mj `elem` go2jail    = 0
+         | mj `elem` chance     = normal * 6 / cards
+         | mj `elem` community  = normal * 14 / cards
          | otherwise          = normal
       maybe_places places x x'
-         | elem j places            = (die_roll i x) 
-         | elem j (map ring places) = (die_roll i x')
+         | j `elem` places            = die_roll i x
+         | j `elem` map ring places = die_roll i x'
          | otherwise                = 0
       maybe_place place = maybe_places [place]
       maybe_jail = maybe_place jail
       -- Sum components since nonactive parts should be 0
       handle_community x x' = (maybe_go + jailed) / cards
          where
-            maybe_go = (maybe_place go x x')
+            maybe_go = maybe_place go x x'
             jailed = maybe_jail x x'
-      handle_chance x x' = communed + (total / cards)
+      handle_chance x x' = communed + total / cards
          where
             total = maybe_special + maybe_back + maybe_utilities
                      -- There are 2 rail cards
@@ -204,7 +207,7 @@ construct_system j' i' = sum [
 -- is also a chance to go to jail. 
 game :: Matrix Double
 game = build (dims', dims') construct_system
-   where dims' = (fromIntegral dims)
+   where dims' = fromIntegral dims
 
 probs = [sum $ map (probs' !!) d | d <- indices]
    where
@@ -212,12 +215,12 @@ probs = [sum $ map (probs' !!) d | d <- indices]
       dims'  = fromInteger dims
       -- Generate the indices about the modulo ring so we can sum up probs
       -- from the 'doubles' states.
-      indices = (map (\x -> filter (\y -> x == flip mod cells' y) board) slots)
+      indices = map (\x -> filter (\y -> x == mod y cells') board) slots
       slots = [0..cells' - 1] :: [Int]
       board = [0..dims' - 1]  :: [Int]
       -- Solve the eigen value problem and coeffiecentwise square.
-      probs' = map (\v ->realPart $ v / (sum eigenvector)) eigenvector
-      eigenvector = (map (toList) (toRows $ tr eigenvectors)) !! idx
+      probs' = map (\v ->realPart $ v / sum eigenvector) eigenvector
+      eigenvector = map toList (toRows $ tr eigenvectors) !! idx
       (eigenvalues, eigenvectors) = eig game
       -- This is a bit of a hack, we have to find eigenvectors
       -- that correspond to stability, but we know there's only 1
@@ -239,4 +242,4 @@ main = print answer
       top3 = take 3 ranks
       ranks = map stringifyIndex bySize
       stringifyIndex = pad . show . fromJust . flip elemIndex probs
-      bySize = (reverse $ sort probs)
+      bySize = sortOn Data.Ord.Down probs

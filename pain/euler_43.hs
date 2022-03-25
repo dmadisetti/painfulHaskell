@@ -47,7 +47,7 @@ toTrie :: Trie -> String -> Trie
 toTrie t [c, b, a] = insertWith f a (singleton b c') t
   where
     c' = [c]
-    f _ old = insertWith union b c' old
+    f _ = insertWith union b c'
 
 divisor :: Int -> [String]
 divisor n = filter ensure $ map (augment . show) $ filter check viable

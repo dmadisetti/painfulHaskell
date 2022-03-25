@@ -29,14 +29,14 @@ assemble = read -- . map intToDigit
 pow2ending :: Integer -> [String]
 pow2ending m = ending 4 0
    where
-      ending a i = [e]:(ending (a * 5) (i + 1))
+      ending a i = [e]:ending (a * 5) (i + 1)
         where
-          e = (reverse $ show (2 ^ (m `mod` a))) !! i
+          e = reverse (show (2 ^ (m `mod` a))) !! i
 
 main :: IO ()
 main = print $ (p * k + 1) `mod` (m * 10)
    where
-      m = (10^9)
+      m = 10^9
       p = assemble $ last $ takeUntil ((>) m . assemble) s
       s = (scanl1 (flip (++)) $ pow2ending 7830457) :: [String]
       k = 28433
