@@ -791,3 +791,16 @@ euler_test(
     problem = 58,
     solution = ":euler_bin58",
 )
+
+haskell_binary(
+    name = "euler_bin99",
+    srcs = ["euler_99.hs"],
+    deps = ["@stackage//:split", "//:base"],
+    data = ["@euler//:external_euler"],
+)
+
+euler_test(
+    name = "euler_99_test",
+    problem = 99,
+    solution = ":euler_bin99",
+)
