@@ -25,10 +25,10 @@ Problem 99
 import           Data.List.Split
 import           System.IO
 
-parse = map Main.split . lines
+parse = map _split . lines
    where
-      split :: String -> Float
-      split = last2 . map read . splitOn ","
+      _split :: String -> Float
+      _split = last2 . map read . splitOn ","
          where
             last2 [a,b] = b * log a
 

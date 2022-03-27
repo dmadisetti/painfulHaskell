@@ -804,3 +804,15 @@ euler_test(
     problem = 99,
     solution = ":euler_bin99",
 )
+
+haskell_binary(
+    name = "euler_bin100",
+    srcs = ["euler_100.hs"],
+    deps = ["//:base"],
+)
+
+euler_test(
+    name = "euler_100_test",
+    problem = 100,
+    solution = ":euler_bin100",
+)
