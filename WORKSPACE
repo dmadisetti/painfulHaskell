@@ -35,7 +35,7 @@ load("@rules_haskell//haskell:cabal.bzl", "stack_snapshot")
 
 stack_snapshot(
     name = "stackage",
-    packages = ["hashmap", "hashable", "hlint", "numbers", "containers", "split", "hmatrix"],
+    packages = ["hashmap", "hashable", "hlint", "numbers", "containers", "sort", "split", "hmatrix"],
     components = {
         "hlint": ["exe"],
         "containers": ["lib"],
