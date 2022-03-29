@@ -24,24 +24,15 @@ Problem 71
 
 import Data.Ratio
 
-{-
-x = np.arange(1,np.floor(1e6/7) + 2)
-y = (3*x - 1)/(7*x)
-
-v = np.argmin(abs(y - 3/7))
-3*v,7*v,(3*v - 1)/(7*v)
--}
 main :: IO ()
 main = print $ num $ fst $ foldl greedy (0, 1.0) $ zip range $ map near range
    where
       range = [1..k]
-      greedy a@(_, r) (i, v)
+      greedy a@(_, r) (i, r')
          | r' < r     = (i, r')
          | otherwise  = a
-         where
-            r' = r37 - v
       r37 = 3 % 7
       k :: Int
       k = floor (1000000.0/7.0)
-      near x = num x % (7*x)
+      near x = r37 - num x % (7*x)
       num x = 3*x - 1

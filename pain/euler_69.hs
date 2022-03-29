@@ -42,10 +42,6 @@ import   Data.HashMap
 import   Helpers (primeFactorize)
 import   GHC.Float
 
-factorial 0 = 1
-factorial 1 = 1
-factorial n = n * factorial (n - 1)
-
 -- Construct hashmap of factor counts
 enumerate :: [Int] -> Map Int Int
 enumerate xs = base
