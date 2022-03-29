@@ -22,36 +22,8 @@ Problem 70
 
 
 import   Data.Sort
-import   Data.HashMap
-import   Helpers (primeFactorize, primes)
+import   Helpers (primes)
 import   GHC.Float
-
-factorial 0 = 1
-factorial 1 = 1
-factorial n = n * factorial (n - 1)
-
--- Construct hashmap of factor counts
-enumerate :: [Int] -> Map Int Int
-enumerate xs = base
-  where
-    base = foldl aggregate init xs
-    update old new = old + new
-    aggregate :: Map Int Int -> Int -> Map Int Int
-    aggregate m el = insertWith update el 1 m
-    init :: Map Int Int
-    init = empty
-
--- counts distinct factors
-totient :: Int -> Int
-totient n = foldWithKey folder 1 factors
-   where
-      factors = enumerate $ primeFactorize n
-      folder k v t = k^(v - 1) * (k - 1) * t
-
-greedy :: (Int, Float) -> (Int, Float) -> (Int, Float)
-greedy a@(i, v) b@(_,v')
-   | v < v'    = a
-   | otherwise = b
 
 isPermutation (i, t) = i' == t'
    where
@@ -59,29 +31,33 @@ isPermutation (i, t) = i' == t'
       t' = f t
       f = sort . show
 
-bruteforce :: IO ()
-bruteforce = print $ foldl greedy (0, 100) $ Prelude.map ratio $ Prelude.filter isPermutation $ zip x $ Prelude.map totient x
-   where
-      x = [5985511..10000000]
-      ratio (i, t) = (i, int2Float i / int2Float t)
-
 -- knowing it will be a 2 factor prime
-main = print $ attempt lower upper (5985511 `quot` pivot) (0, 2)
+main = print $ attempt lower lower upper (feasible `quot` pivot) (0, 2)
    where
-      attempt :: [Int] -> [Int] -> Int -> (Int, Float) -> Int
-      attempt (l:ls) k@(u:u':us) b r@(i, v)
-         | u * l > 10000000   = attempt ls k b r
-         | l < b              = attempt lower (u':us) (5985511 `quot` u') r
-         | perm && smaller    = attempt ls k b (l*u, v')
-         | otherwise          = attempt ls k b r
+      limit    = 10000000
+      feasible = 4869943 -- from solving x = (log_10(limit) - 1) exp(gamma) log log x
+      attempt ::[Int] -> [Int] -> [Int] -> Int -> (Int, Float) -> Int
+      attempt pl (l:ls) k@(u:u':us) b r@(i, v)
+         | l < b                 = maybeNext
+         | isPermutation (n, t)  = attempt ls' ls' us' b' (n, v')
+         | otherwise             = attempt pl ls k b r
          where
-            smaller = v' < v
-            v' = ratio (l*u) ((l - 1)*(u - 1))
-            perm = isPermutation (l*u, (l - 1) * (u - 1))
-      attempt _ _ _ (i, _) = i
-      ratio i t = int2Float i / int2Float t
-      (lower, upper) = cleave ([], takeWhile (< 2 * pivot) primes)
-      pivot = round $ sqrt 5985511
-      cleave (a, (x:xs))
-         | x > pivot   = (x:a, xs)
+            maybeNext
+               | l' < b'       = i
+               | otherwise     = attempt ls' ls' us' b' r
+            l'  = head ls'
+            ls' = Prelude.filter ((>) limit . (*) u') (u:pl)
+            us' = u':us
+            -- our boundary is met when we cannot do better than the current ratio,
+            -- or we are out of the feasible range
+            b' = max (feasible `quot` u') $ floor $ 1 / (1 - ratio u' (u' - 1) / v)
+            v' = ratio n t
+            t = (l - 1) * (u - 1)
+            n = l * u
+      attempt _ _ _ _ (i, _) = i
+      ratio n t = int2Float n / int2Float t
+      (lower, upper) = cleave ([], primes)
+      pivot = round $ sqrt $ int2Float feasible
+      cleave (a, x:xs)
+         | x > pivot   = (a, x:xs)
          | otherwise   = cleave (x:a, xs)
